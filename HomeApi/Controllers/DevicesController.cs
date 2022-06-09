@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HomeApi.Controllers
 {
     /// <summary>
-    /// Контроллер устройсив
+    /// Контроллер устройств
     /// </summary>
     [ApiController]
     [Route("[controller]")]
@@ -141,7 +141,6 @@ namespace HomeApi.Controllers
             var device = await _devices.GetDeviceById(id);
             if (device == null)
                 return StatusCode(400, $"Ошибка: Устройство с идентификатором {id} не существует.");
-
 
             await _devices.DeleteDevice(
                 device
