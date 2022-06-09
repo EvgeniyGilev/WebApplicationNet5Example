@@ -15,9 +15,10 @@ namespace HomeApi.Contracts.Models.Devices
         public string Model { get; set; }
         [Required]
         public string SerialNumber { get; set; }
-        [Required]
+        //[Required]
         // Указываем допустимый диапазон значений и даже текст ошибки в случае нарушения
-        [Range(120, 220, ErrorMessage = "Поддерживаются устройства с напряжением от {1} до {2} вольт")]
+        // сделал через fluend validation
+       // [Range(120, 220, ErrorMessage = "Поддерживаются устройства с напряжением от {1} до {2} вольт")]
         public int CurrentVolts { get; set; }
         [Required]
         public bool GasUsage { get; set; }

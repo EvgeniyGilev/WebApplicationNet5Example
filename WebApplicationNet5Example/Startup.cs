@@ -13,6 +13,8 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using WebApplicationExample.Configuration.HomeApi.Configuration;
+using FluentValidation.AspNetCore;
+using HomeApi.Contracts.Models.Devices.Validators;
 
 namespace WebApplicationNet5Example
 {
@@ -34,6 +36,8 @@ namespace WebApplicationNet5Example
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //подключаем валидаторы
+            services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AddDeviceRequestValidator>());
             // Добавляем новый сервис
             services.Configure<HomeOptions>(Configuration);
 
