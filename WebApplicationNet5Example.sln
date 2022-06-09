@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationNet5Example", "WebApplicationNet5Example\WebApplicationNet5Example.csproj", "{D6C40962-F784-486A-9AA1-6DF521041065}"
+	ProjectSection(ProjectDependencies) = postProject
+		{091B9064-F9E5-4FAF-B7B6-9FA987328D8B} = {091B9064-F9E5-4FAF-B7B6-9FA987328D8B}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeApi.Contracts", "HomeApi.Contracts\HomeApi.Contracts.csproj", "{091B9064-F9E5-4FAF-B7B6-9FA987328D8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{D6C40962-F784-486A-9AA1-6DF521041065}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6C40962-F784-486A-9AA1-6DF521041065}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6C40962-F784-486A-9AA1-6DF521041065}.Release|Any CPU.Build.0 = Release|Any CPU
+		{091B9064-F9E5-4FAF-B7B6-9FA987328D8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{091B9064-F9E5-4FAF-B7B6-9FA987328D8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{091B9064-F9E5-4FAF-B7B6-9FA987328D8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{091B9064-F9E5-4FAF-B7B6-9FA987328D8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
