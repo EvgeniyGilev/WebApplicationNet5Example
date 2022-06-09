@@ -15,6 +15,7 @@ namespace HomeApi.Data.Repos
         Task<Device> GetDeviceById(Guid id);
         Task SaveDevice(Device device, Room room);
         Task UpdateDevice(Device device, Room room, UpdateDeviceQuery query);
+        Task UpdateDeviceAll(Device device, Room room, UpdateDeviceAllDataQuery query);
         Task DeleteDevice(Device device);
     }
 }

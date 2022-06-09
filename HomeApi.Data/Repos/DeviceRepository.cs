@@ -93,6 +93,40 @@ namespace HomeApi.Data.Repos
         }
 
         /// <summary>
+        /// Обновить существующее устройство
+        /// </summary>
+        public async Task UpdateDeviceAll(Device device, Room room, UpdateDeviceAllDataQuery query)
+        {
+            // Привязываем новое устройство к соответствующей комнате перед сохранением
+            device.RoomId = room.Id;
+            device.Room = room;
+
+            // Если в запрос переданы параметры для обновления - проверяем их на null
+            // И если нужно - обновляем устройство
+            if (!string.IsNullOrEmpty(query.NewName))
+                device.Name = query.NewName;
+            if (!string.IsNullOrEmpty(query.NewModel))
+                device.Model = query.NewModel;
+            if (!string.IsNullOrEmpty(query.NewManufacturer))
+                device.Manufacturer = query.NewManufacturer;
+            if (!string.IsNullOrEmpty(query.NewSerial))
+                device.CurrentVolts = query.NewCurrentVolts;
+                device.GasUsage = query.NewGasUsage;
+                device.CurrentVolts = query.NewCurrentVolts;
+            if (!string.IsNullOrEmpty(query.NewLocation))
+                device.Location = query.NewLocation;
+
+
+            // Добавляем в базу 
+            var entry = _context.Entry(device);
+            if (entry.State == EntityState.Detached)
+                _context.Devices.Update(device);
+
+            // Сохраняем изменения в базе 
+            await _context.SaveChangesAsync();
+        }
+
+        /// <summary>
         /// Удалить устройство
         /// </summary>
         public async Task DeleteDevice(Device device)

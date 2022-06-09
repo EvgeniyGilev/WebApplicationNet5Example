@@ -97,5 +97,37 @@ namespace HomeApi.Controllers
 
             return StatusCode(200, $"Устройство обновлено! Имя - {device.Name}, Серийный номер - {device.SerialNumber},  Комната подключения - {device.Room.Name}");
         }
+
+        /// <summary>
+        /// Полное изменение существующего устройства
+        /// </summary>
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> Rewrite(
+            [FromRoute] Guid id,
+            [FromBody] RewriteDeviceRequest request)
+        {
+            var room = await _rooms.GetRoomByName(request.NewRoomLocation);
+            if (room == null)
+                return StatusCode(400, $"Ошибка: Комната {request.NewRoomLocation} не подключена. Сначала подключите комнату!");
+
+            var device = await _devices.GetDeviceById(id);
+            if (device == null)
+                return StatusCode(400, $"Ошибка: Устройство с идентификатором {id} не существует.");
+
+            var withSameName = await _devices.GetDeviceByName(request.NewName);
+            if (withSameName != null)
+                return StatusCode(400, $"Ошибка: Устройство с именем {request.NewName} уже подключено. Выберите другое имя!");
+
+            //тут можно добавить обработку и других полей, но лень
+
+            await _devices.UpdateDeviceAll(
+                device,
+                room,
+                new UpdateDeviceAllDataQuery(request.NewName, request.NewModel, request.NewManufacturer, request.NewSerialNumber, request.NewCurrentVolts, request.NewGasUsage, request.NewRoomLocation)
+            );
+
+            return StatusCode(200, $"Устройство изменено! Имя - {device.Name}, Серийный номер - {device.SerialNumber},  Комната подключения - {device.Room.Name}");
+        }
     }
 }
