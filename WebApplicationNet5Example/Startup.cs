@@ -10,6 +10,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using WebApplicationExample.Configuration.HomeApi.Configuration;
 
@@ -35,6 +36,11 @@ namespace WebApplicationNet5Example
         {
             // Добавляем новый сервис
             services.Configure<HomeOptions>(Configuration);
+
+            // Подключаем автомаппинг
+            var assembly = Assembly.GetAssembly(typeof(MappingProfile));
+            services.AddAutoMapper(assembly);
+
 
             services.AddControllers();
             services.AddSwaggerGen(c => {
